@@ -3,11 +3,21 @@ import fetch from 'node-fetch';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Lista de dominios permitidos
+const allowedOrigins = [
+    'https://5666986.hs-sites.com',
+    'https://landings.multimoney.com/' 
+];
+
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://5666986.hs-sites.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin)) {
+        res.header('Access-Control-Allow-Origin', origin);
+    }
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
+
 
 app.get('/proxy/:symbol', async (req, res) => {
     const symbol = req.params.symbol;
