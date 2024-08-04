@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 // Lista de dominios permitidos
 const allowedOrigins = [
     'https://5666986.hs-sites.com',
-    'https://landings.multimoney.com/' 
+    'https://landings.multimoney.com' 
 ];
 
 app.use((req, res, next) => {
